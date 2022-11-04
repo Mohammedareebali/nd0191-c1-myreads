@@ -1,12 +1,15 @@
 import "./App.css";
 import { useState } from "react";
-
+import Search from "./components/Search";
+import test from "./components/Test";
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
+  const [searchValue, setSearchValue] = useState();
 
   return (
     <div className="app">
       {showSearchPage ? (
+        
         <div className="search-books">
           <div className="search-books-bar">
             <a
@@ -16,15 +19,22 @@ function App() {
               Close
             </a>
             <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title, author, or ISBN"
-              />
+              <input id="search"
+                type="text"N
+                placeholder="Search by title, author, or ISB"
+              onChange={function(){
+                 setSearchValue(document.getElementById('search').value);
+                
+              } }/>
+              
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid"></ol>
+            <ol className="books-grid">
+          < Search searchValue = {searchValue} />
+            </ol>
           </div>
+          <script  src="./src/components/comp/Test.js"></script>
         </div>
       ) : (
         <div className="list-books">
@@ -277,6 +287,7 @@ function App() {
           </div>
         </div>
       )}
+
     </div>
   );
 }
