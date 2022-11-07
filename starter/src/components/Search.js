@@ -16,10 +16,10 @@ const  Search =(props) => {
   
 },[props.searchValue] );
 
-//console.log('it ran')
+
     return (
       
-  <Searchoutput posts = {posts}/>
+  <Searchoutput posts = {posts} setDisplay = {props.setDisplay}/>
      );
 }
  

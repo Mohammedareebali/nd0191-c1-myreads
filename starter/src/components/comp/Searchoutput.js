@@ -1,9 +1,11 @@
+import { update } from "../../BooksAPI";
+
 const Searchoutput = (props) => {
-    if( props.posts !== undefined && props.posts.length > 0){
-        
-    return props.posts.map((val) => {
-        console.log(val)
+        let a = props.posts.filter(val => ( val.shelf === props.section));
+    return a.map((val) => {
     return (  
+        <>
+        
         <li key={val.id}>
             <div className="book">
                 <div className="book-top">
@@ -12,20 +14,30 @@ const Searchoutput = (props) => {
                         style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url(${val.imageLinks.thumbnail && ''})`,
+                            backgroundImage: `url(${val.imageLinks.thumbnail || ''})`,
                         }}
                     ></div>
                     <div className="book-shelf-changer">
-                        <select>
-                            <option value="none" disabled>
+                    <select 
+                     id = {val.id} 
+                     onChange={async function(){
+                                let e  = document.getElementById(`${val.id}`);
+                                e.options[e.selectedIndex].setAttribute('selected' , 'selected');
+                                let value = e.options[e.selectedIndex].value;            
+                                let a = await update(val,value);
+                                props.setDisplay(a);
+                                
+                            
+                            }}>
+                            <option value="none" disabled >
                                 Move to...
                             </option>
-                            <option value="currentlyReading">
+                            <option value="currentlyReading"  >
                                 Currently Reading
                             </option>
-                            <option value="wantToRead">Want to Read</option>
+                            <option value="wantToRead"  >Want to Read</option>
                             <option value="read">Read</option>
-                            <option value="none">None</option>
+                            <option value="none" >None</option>
                         </select>
                     </div>
                 </div>
@@ -33,15 +45,11 @@ const Searchoutput = (props) => {
                 <div className="book-authors">{val.authors}</div>
             </div>
         </li>
-
+</>
     )
 }
     );
-}
-else{
-    return <>
-    </>
-}
+
 }
 
 export default Searchoutput

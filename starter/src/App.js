@@ -1,11 +1,13 @@
 import "./App.css";
 import { useState } from "react";
 import Search from "./components/Search";
-import test from "./components/Test";
+import { getAll } from "./BooksAPI";
+import Display from "./components/Display";
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
   const [searchValue, setSearchValue] = useState();
-
+  const [display,setDisplay] = useState([]);
+  
   return (
     <div className="app">
       {showSearchPage ? (
@@ -31,7 +33,7 @@ function App() {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-          < Search searchValue = {searchValue} />
+          < Search searchValue = {searchValue} display ={display} setDisplay = {setDisplay} />
             </ol>
           </div>
           <script  src="./src/components/comp/Test.js"></script>
@@ -47,6 +49,7 @@ function App() {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
+                    <Display display = {display} setDisplay = {setDisplay} section = {'currentlyReading'}/>
                     <li>
                       <div className="book">
                         <div className="book-top">
@@ -61,13 +64,13 @@ function App() {
                           ></div>
                           <div className="book-shelf-changer">
                             <select>
-                              <option value="none" disabled>
+                              <option value="none" disabled >
                                 Move to...
                               </option>
-                              <option value="currentlyReading">
+                              <option value="currentlyReading" >
                                 Currently Reading
                               </option>
-                              <option value="wantToRead">Want to Read</option>
+                              <option value="wantToRead" >Want to Read</option>
                               <option value="read">Read</option>
                               <option value="none">None</option>
                             </select>
@@ -114,6 +117,7 @@ function App() {
                 <h2 className="bookshelf-title">Want to Read</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
+                  <Display display = {display} setDisplay = {setDisplay} section = {'wantToRead'}/>
                     <li>
                       <div className="book">
                         <div className="book-top">
@@ -183,6 +187,7 @@ function App() {
                 <h2 className="bookshelf-title">Read</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
+                  <Display display = {display} setDisplay = {setDisplay} section ={'read'}/>
                     <li>
                       <div className="book">
                         <div className="book-top">
