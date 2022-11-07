@@ -1,7 +1,6 @@
 import { useState , useEffect } from "react";
 import { getAll , get } from "../BooksAPI";
 import Searchoutput from "./comp/Searchoutput";
-import Test from "./comp/Test";
 
 function Display(props) {
     const [posts ,setPosts] = useState([]);
