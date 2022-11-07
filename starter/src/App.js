@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import Search from "./components/Search";
-import { getAll } from "./BooksAPI";
+
 import Display from "./components/Display";
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
@@ -36,7 +36,6 @@ function App() {
           < Search searchValue = {searchValue} display ={display} setDisplay = {setDisplay} />
             </ol>
           </div>
-          <script  src="./src/components/comp/Test.js"></script>
         </div>
       ) : (
         <div className="list-books">
